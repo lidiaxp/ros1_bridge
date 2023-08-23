@@ -199,9 +199,10 @@ void update_bridge(
       continue;
     }
 
-    
-    if (topic_name.c_str() != "/kingfisher/motor_speed/0" && topic_name != "/kingfisher/motor_speed/1" && topic_name != "/kingfisher/motor_speed/2" && topic_name != "/kingfisher/motor_speed/3") {
-        bridges_1to2[topic_name] = bridge;
+    if (containsSubstring(topic_name.c_str(), "motor_speed")){
+
+    }else{
+      bridges_1to2[topic_name] = bridge;
         printf(
         "---created 1to2 bridge for topic '%s' with ROS 1 type '%s' and ROS 2 type '%s'\n",
         topic_name.c_str(), bridge.ros1_type_name.c_str(), bridge.ros2_type_name.c_str());
@@ -285,11 +286,6 @@ void update_bridge(
       to_be_removed_1to2.push_back(topic_name);
     }
   }
-  to_be_removed_1to2.push_back("/kingfisher/motor_speed/0");
-  to_be_removed_1to2.push_back("/kingfisher/motor_speed/1");
-  to_be_removed_1to2.push_back("/kingfisher/motor_speed/2");
-  to_be_removed_1to2.push_back("/kingfisher/motor_speed/3");
-
 
   for (auto topic_name : to_be_removed_1to2) {
     bridges_1to2.erase(topic_name);
