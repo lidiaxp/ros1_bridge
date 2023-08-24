@@ -540,7 +540,7 @@ int main(int argc, char * argv[])
             }
             printf("*** topic '%s' comparing '%s'\n", topic_name.c_str(), topic_name == "/kingfisher/motor_speed/0" ? "true" : "false");
             printf("*** node '%s' comparing '%s'\n", node_name.c_str(), node_name == "/kingfisher/motor_speed/0" ? "true" : "false");
-            if (topic_name.c_str() == "/kingfisher/motor_speed/0"){
+            if (topic_name == "/kingfisher/motor_speed/0" || topic_name == "/kingfisher/motor_speed/1" || topic_name == "/kingfisher/motor_speed/2" || topic_name == "/kingfisher/motor_speed/3"){
 
             } else{
               active_publishers.insert(topic_name);
