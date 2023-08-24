@@ -199,7 +199,13 @@ void update_bridge(
       continue;
     }
 
-    if (containsSubstring(topic_name.c_str(), "motor_speed")){
+    // printf("*** topic '%s' comparing '%b'\n", topic_name.c_str(), topic_name.c_str() == "/kingfisher/motor_speed/0")
+    printf("*** topic '%s' comparing '%s'\n", topic_name.c_str(), topic_name.c_str() == "/kingfisher/motor_speed/0" ? "true" : "false");
+
+    // printf("!!! topic '%s' comparing '%b'\n", topic_name.c_str(), topic_name.c_str()[topic_name.size() - 2] == '/')
+    printf("!!! topic '%s' comparing '%s'\n", topic_name.c_str(), topic_name.c_str()[topic_name.size() - 2] == '/' ? "true" : "false");
+    
+    if (topic_name.c_str() == "/kingfisher/motor_speed/0"){
 
     }else{
       bridges_1to2[topic_name] = bridge;
