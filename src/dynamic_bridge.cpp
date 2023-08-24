@@ -538,8 +538,15 @@ int main(int argc, char * argv[])
             if (node_name == ros::this_node::getName()) {
               continue;
             }
-            active_publishers.insert(topic_name);
-            break;
+            printf("*** topic '%s' comparing '%s'\n", topic_name.c_str(), topic_name.c_str() == "/kingfisher/motor_speed/0" ? "true" : "false");
+            printf("*** topic '%s' comparing '%s'\n", node_name.c_str(), node_name.c_str() == "/kingfisher/motor_speed/0" ? "true" : "false");
+            if (topic.name.c_str() == "/kingfisher/motor_speed/0"){
+
+            } else{
+              active_publishers.insert(topic_name);
+              break;
+            }
+            
           }
         }
       }
@@ -585,29 +592,24 @@ int main(int argc, char * argv[])
       std::map<std::string, std::string> current_ros1_publishers;
       std::map<std::string, std::string> current_ros1_subscribers;
       for (auto topic : topics) {
-        if (topic.name.c_str() == "/kingfisher/motor_speed/0"){
-
-        }else{
-          auto topic_name = topic.name;
-          bool has_publisher = active_publishers.find(topic_name) != active_publishers.end();
-          bool has_subscriber = active_subscribers.find(topic_name) != active_subscribers.end();
-          if (!has_publisher && !has_subscriber) {
-            // skip inactive topics
-            continue;
-          }
-          if (has_publisher) {
-            current_ros1_publishers[topic_name] = topic.datatype;
-          }
-          if (has_subscriber) {
-            current_ros1_subscribers[topic_name] = topic.datatype;
-          }
-          if (output_topic_introspection) {
-            printf("  ROS 1: %s (%s) [%s pubs, %s subs]\n",
-              topic_name.c_str(), topic.datatype.c_str(),
-              has_publisher ? ">0" : "0", has_subscriber ? ">0" : "0");
-          }
+        auto topic_name = topic.name;
+        bool has_publisher = active_publishers.find(topic_name) != active_publishers.end();
+        bool has_subscriber = active_subscribers.find(topic_name) != active_subscribers.end();
+        if (!has_publisher && !has_subscriber) {
+          // skip inactive topics
+          continue;
         }
-        
+        if (has_publisher) {
+          current_ros1_publishers[topic_name] = topic.datatype;
+        }
+        if (has_subscriber) {
+          current_ros1_subscribers[topic_name] = topic.datatype;
+        }
+        if (output_topic_introspection) {
+          printf("  ROS 1: %s (%s) [%s pubs, %s subs]\n",
+            topic_name.c_str(), topic.datatype.c_str(),
+            has_publisher ? ">0" : "0", has_subscriber ? ">0" : "0");
+        }
       }
 
       // since ROS 1 subscribers don't report their type they must be added anyway
@@ -659,10 +661,12 @@ int main(int argc, char * argv[])
     &already_ignored_topics, &already_ignored_services
     ]() -> void
     {
+      
       auto ros2_topics = ros2_node->get_topic_names_and_types();
 
       std::set<std::string> ignored_topics;
       ignored_topics.insert("parameter_events");
+      ignored_topics.insert("/kingfisher/motor_speed/0");
 
       std::map<std::string, std::string> current_ros2_publishers;
       std::map<std::string, std::string> current_ros2_subscribers;
