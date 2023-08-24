@@ -209,9 +209,9 @@ void update_bridge(
 
     }else{
       bridges_1to2[topic_name] = bridge;
-        printf(
-        "---created 1to2 bridge for topic '%s' with ROS 1 type '%s' and ROS 2 type '%s'\n",
-        topic_name.c_str(), bridge.ros1_type_name.c_str(), bridge.ros2_type_name.c_str());
+        // printf(
+        // "---created 1to2 bridge for topic '%s' with ROS 1 type '%s' and ROS 2 type '%s'\n",
+        // topic_name.c_str(), bridge.ros1_type_name.c_str(), bridge.ros2_type_name.c_str());
     }
   }
 
@@ -538,8 +538,8 @@ int main(int argc, char * argv[])
             if (node_name == ros::this_node::getName()) {
               continue;
             }
-            printf("*** topic '%s' comparing '%s'\n", topic_name.c_str(), topic_name.c_str() == "/kingfisher/motor_speed/0" ? "true" : "false");
-            printf("*** topic '%s' comparing '%s'\n", node_name.c_str(), node_name.c_str() == "/kingfisher/motor_speed/0" ? "true" : "false");
+            printf("*** topic '%s' comparing '%s'\n", topic_name.c_str(), topic_name == "/kingfisher/motor_speed/0" ? "true" : "false");
+            printf("*** node '%s' comparing '%s'\n", node_name.c_str(), node_name == "/kingfisher/motor_speed/0" ? "true" : "false");
             if (topic_name.c_str() == "/kingfisher/motor_speed/0"){
 
             } else{
