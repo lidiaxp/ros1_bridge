@@ -200,11 +200,11 @@ void update_bridge(
     }
 
     // printf("*** topic '%s' comparing '%b'\n", topic_name.c_str(), topic_name.c_str() == "/kingfisher/motor_speed/0")
-    printf("*** topic '%s' comparing '%s'\n", topic_name.c_str(), topic_name.c_str() == "/kingfisher/motor_speed/0" ? "true" : "false");
+    // printf("*** topic '%s' comparing '%s'\n", topic_name.c_str(), topic_name.c_str() == "/kingfisher/motor_speed/0" ? "true" : "false");
 
     // printf("!!! topic '%s' comparing '%b'\n", topic_name.c_str(), topic_name.c_str()[topic_name.size() - 2] == '/')
-    printf("!!! topic '%s' comparing '%s'\n", topic_name.c_str(), topic_name.c_str()[topic_name.size() - 2] == '/' ? "true" : "false");
-    
+    // printf("!!! topic '%s' comparing '%s'\n", topic_name.c_str(), topic_name.c_str()[topic_name.size() - 2] == '/' ? "true" : "false");
+
     if (topic_name.c_str() == "/kingfisher/motor_speed/0"){
 
     }else{
@@ -585,24 +585,29 @@ int main(int argc, char * argv[])
       std::map<std::string, std::string> current_ros1_publishers;
       std::map<std::string, std::string> current_ros1_subscribers;
       for (auto topic : topics) {
-        auto topic_name = topic.name;
-        bool has_publisher = active_publishers.find(topic_name) != active_publishers.end();
-        bool has_subscriber = active_subscribers.find(topic_name) != active_subscribers.end();
-        if (!has_publisher && !has_subscriber) {
-          // skip inactive topics
-          continue;
+        if (topic.name.c_str() == "/kingfisher/motor_speed/0"){
+
+        }else{
+          auto topic_name = topic.name;
+          bool has_publisher = active_publishers.find(topic_name) != active_publishers.end();
+          bool has_subscriber = active_subscribers.find(topic_name) != active_subscribers.end();
+          if (!has_publisher && !has_subscriber) {
+            // skip inactive topics
+            continue;
+          }
+          if (has_publisher) {
+            current_ros1_publishers[topic_name] = topic.datatype;
+          }
+          if (has_subscriber) {
+            current_ros1_subscribers[topic_name] = topic.datatype;
+          }
+          if (output_topic_introspection) {
+            printf("  ROS 1: %s (%s) [%s pubs, %s subs]\n",
+              topic_name.c_str(), topic.datatype.c_str(),
+              has_publisher ? ">0" : "0", has_subscriber ? ">0" : "0");
+          }
         }
-        if (has_publisher) {
-          current_ros1_publishers[topic_name] = topic.datatype;
-        }
-        if (has_subscriber) {
-          current_ros1_subscribers[topic_name] = topic.datatype;
-        }
-        if (output_topic_introspection) {
-          printf("  ROS 1: %s (%s) [%s pubs, %s subs]\n",
-            topic_name.c_str(), topic.datatype.c_str(),
-            has_publisher ? ">0" : "0", has_subscriber ? ">0" : "0");
-        }
+        
       }
 
       // since ROS 1 subscribers don't report their type they must be added anyway
