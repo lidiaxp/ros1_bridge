@@ -172,7 +172,7 @@ protected:
 
     std::string key = "callerid";
     if (connection_header->find(key) != connection_header->end()) {
-      if (connection_header->at(key) == "/ros_bridge") {
+      if (connection_header->at(key) == "/ros_bridge_melodic") {
         return;
       }
     }
