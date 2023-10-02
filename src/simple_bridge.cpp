@@ -54,7 +54,7 @@ void ros1ChatterCallback(const ros::MessageEvent<std_msgs::String const> & ros1_
     ros1_msg_event.getConnectionHeaderPtr();
   std::string key = "callerid";
   if (connection_header->find(key) != connection_header->end()) {
-    if (connection_header->at(key) == "/ros_bridge") {
+    if (connection_header->at(key) == "/ros_bridge_melodic") {
       printf("    I heard from ROS 1 from myself\n");
       return;
     }
@@ -74,13 +74,13 @@ void ros1ChatterCallback(const ros::MessageEvent<std_msgs::String const> & ros1_
 int main(int argc, char * argv[])
 {
   // ROS 1 node and publisher
-  ros::init(argc, argv, "ros_bridge");
+  ros::init(argc, argv, "ros_bridge_melodic");
   ros::NodeHandle ros1_node;
   ros1_pub = ros1_node.advertise<std_msgs::String>("chatter", 10);
 
   // ROS 2 node and publisher
   rclcpp::init(argc, argv);
-  auto ros2_node = rclcpp::Node::make_shared("ros_bridge");
+  auto ros2_node = rclcpp::Node::make_shared("ros_bridge_melodic");
   ros2_pub = ros2_node->create_publisher<std_msgs::msg::String>(
     "chatter", rclcpp::SensorDataQoS());
 
