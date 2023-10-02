@@ -483,10 +483,10 @@ int main(int argc, char * argv[])
   }
   rclcpp::init(args.size(), args.data());
 
-  auto ros2_node = rclcpp::Node::make_shared("ros_bridge");
+  auto ros2_node = rclcpp::Node::make_shared("ros_bridge_melodic");
 
   // ROS 1 node
-  ros::init(argc, argv, "ros_bridge");
+  ros::init(argc, argv, "ros_bridge_melodic");
   ros::NodeHandle ros1_node;
 
   // mapping of available topic names to type names
