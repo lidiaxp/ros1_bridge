@@ -271,10 +271,17 @@ void update_bridge(
       continue;
     }
 
+    if (topic_name == "/kingfisher/motor_speed/0" || topic_name == "/kingfisher/motor_speed/1" || topic_name == "/kingfisher/motor_speed/2" || topic_name == "/kingfisher/motor_speed/3"|| topic_name == "/oak/rgb/camera_info" || topic_name == "/oak/rgb/image_raw" || topic_name == "/oak/rgb/image_raw/compressed" || topic_name == "/oak/rgb/image_raw/compressedDepth" || topic_name == "/oak/rgb/image_raw/theora" || topic_name == "/oak/right/image_rect" || topic_name == "/oak/right/image_rect/compressed" || topic_name == "/oak/right/image_rect/compressedDepth" || topic_name == "/oak/right/image_rect/theora" || topic_name == "/oak/stereo/image_raw" || topic_name == "/oak/stereo/image_raw/compressed" || topic_name == "/oak/stereo/image_raw/compressedDepth" || topic_name == "/oak/stereo/image_raw/theora"
+){
+
+            }
+            else{
     bridges_2to1[topic_name] = bridge;
-    printf(
+              printf(
       "created 2to1 bridge for topic '%s' with ROS 2 type '%s' and ROS 1 type '%s'\n",
       topic_name.c_str(), bridge.ros2_type_name.c_str(), bridge.ros1_type_name.c_str());
+              }
+    
   }
 
   // remove obsolete bridges
