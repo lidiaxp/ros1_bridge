@@ -572,8 +572,16 @@ int main(int argc, char * argv[])
             if (node_name == ros::this_node::getName()) {
               continue;
             }
-            active_subscribers.insert(topic_name);
+
+            if (topic_name == "/kingfisher/motor_speed/0" || topic_name == "/kingfisher/motor_speed/1" || topic_name == "/kingfisher/motor_speed/2" || topic_name == "/kingfisher/motor_speed/3"|| topic_name == "/oak/rgb/camera_info" || topic_name == "/oak/rgb/image_raw" || topic_name == "/oak/rgb/image_raw/compressed" || topic_name == "/oak/rgb/image_raw/compressedDepth" || topic_name == "/oak/rgb/image_raw/theora" || topic_name == "/oak/right/image_rect" || topic_name == "/oak/right/image_rect/compressed" || topic_name == "/oak/right/image_rect/compressedDepth" || topic_name == "/oak/right/image_rect/theora" || topic_name == "/oak/stereo/image_raw" || topic_name == "/oak/stereo/image_raw/compressed" || topic_name == "/oak/stereo/image_raw/compressedDepth" || topic_name == "/oak/stereo/image_raw/theora"
+            ){
+
+            }
+            else{
+              active_subscribers.insert(topic_name);
             break;
+            }
+            
           }
         }
       }
