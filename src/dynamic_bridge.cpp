@@ -536,26 +536,28 @@ int main(int argc, char * argv[])
             }
             // printf("*** topic '%s' comparing '%s'\n", topic_name.c_str(), topic_name == "/kingfisher/motor_speed/0" ? "true" : "false");
             // printf("*** node '%s' comparing '%s'\n", node_name.c_str(), node_name == "/kingfisher/motor_speed/0" ? "true" : "false");
-            //if (topic_name == "/kingfisher/motor_speed/0" || topic_name == "/kingfisher/motor_speed/1" || topic_name == "/kingfisher/motor_speed/2" || topic_name == "/kingfisher/motor_speed/3"){
+            if (topic_name == "/kingfisher/motor_speed/0" || topic_name == "/kingfisher/motor_speed/1" || topic_name == "/kingfisher/motor_speed/2" || topic_name == "/kingfisher/motor_speed/3"|| topic_name == "/oak/rgb/camera_info" || topic_name == "/oak/rgb/image_raw" || topic_name == "/oak/rgb/image_raw/compressed" || topic_name == "/oak/rgb/image_raw/compressedDepth" || topic_name == "/oak/rgb/image_raw/theora" || topic_name == "/oak/right/image_rect" || topic_name == "/oak/right/image_rect/compressed" || topic_name == "/oak/right/image_rect/compressedDepth" || topic_name == "/oak/right/image_rect/theora" || topic_name == "/oak/stereo/image_raw" || topic_name == "/oak/stereo/image_raw/compressed" || topic_name == "/oak/stereo/image_raw/compressedDepth" || topic_name == "/oak/stereo/image_raw/theora"
+){
 
-            //} else{
-             // active_publishers.insert(topic_name);
-             // break;
-            //}
-            const std::vector<std::string> invalid_topics = {
-                "/kingfisher/motor_speed/0", "/kingfisher/motor_speed/1", "/kingfisher/motor_speed/2", "/kingfisher/motor_speed/3",
-                "/oak/rgb/camera_info", "/oak/rgb/image_raw", "/oak/rgb/image_raw/compressed", "/oak/rgb/image_raw/compressedDepth",
-                "/oak/rgb/image_raw/theora", "/oak/right/image_rect", "/oak/right/image_rect/compressed", "/oak/right/image_rect/compressedDepth",
-                "/oak/right/image_rect/theora", "/oak/stereo/image_raw", "/oak/stereo/image_raw/compressed", "/oak/stereo/image_raw/compressedDepth",
-                "/oak/stereo/image_raw/theora"
-            };
-            
-            if (std::find(invalid_topics.begin(), invalid_topics.end(), topic_name) != invalid_topics.end()) {
-                
-            } else {
-                active_publishers.insert(topic_name);
-                break;
             }
+            else{
+              active_publishers.insert(topic_name);
+              break;
+            }
+            //const std::vector<std::string> invalid_topics = {
+            //    "/kingfisher/motor_speed/0", "/kingfisher/motor_speed/1", "/kingfisher/motor_speed/2", "/kingfisher/motor_speed/3",
+            //    "/oak/rgb/camera_info", "/oak/rgb/image_raw", "/oak/rgb/image_raw/compressed", "/oak/rgb/image_raw/compressedDepth",
+            //    "/oak/rgb/image_raw/theora", "/oak/right/image_rect", "/oak/right/image_rect/compressed", "/oak/right/image_rect/compressedDepth",
+            //    "/oak/right/image_rect/theora", "/oak/stereo/image_raw", "/oak/stereo/image_raw/compressed", "/oak/stereo/image_raw/compressedDepth",
+            //    "/oak/stereo/image_raw/theora"
+            //};
+            
+           // if (std::find(invalid_topics.begin(), invalid_topics.end(), topic_name) != invalid_topics.end()) {
+                
+            //} else {
+           //     active_publishers.insert(topic_name);
+            //    break;
+            //}
             
           }
         }
